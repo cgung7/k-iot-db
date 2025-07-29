@@ -17,7 +17,7 @@ CREATE DATABASE example2; -- Can't create database 'example2'; database exists
 
 -- 테이블 생성 -- 
 ### create: 테이블 생성, 테이블에 저장될 데이터의 형태와 특성을 정의
-# 데이터타입, 제약조거느 기본값 등의 설정 가능
+# 데이터타입, 제약조건은 기본값 등의 설정 가능
 # 기본형태
 # CREATE TABLE 데이터베이스.테이블명 ( 
 # 		컬럼1 데이터타입 [선택적 옵션],
