@@ -16,7 +16,7 @@
     7. limit 컬럼 수 제한: 반환할 항(레코드)의 수를 제한
     
     cf) DB 내부 실제 순서 
-    FROM 테이블 > JOIN(추가 테이블 데이터 가져오기
+    FROM 테이블 > JOIN(추가 테이블 데이터 가져오기)
     > WHERE(필터링) > group by(그룹화) > having(조건) > select(컬럼 추출)
     > order by(정렬) ? limit(제한)
 */
@@ -132,7 +132,7 @@ where
     # _: 하나의 기호가 한 글자를 허용 (정확하게 하나의 읨의의 문자공간을 나타냄)
     # % : 무엇이든 허용 (0개 이상의 임의의 문자 공간을 나타냄)
     
-    select * from `members`
+    select * from `members`;
 	
     # 시작이 J이고, 뒤는 0개 이상의 문자를 허용 검색 : J%
     select * from `members`
@@ -142,7 +142,7 @@ where
 	# 시작이 J이고 뒤는 3개의 임의 문자를 허용 검색 J_
     select * from `members`
     where
-		name like 'j__';
+		name like 'j___';
         
 	
 	# 어떤 문자열 내에서든 'un'이 포함만 되면 허용 검색: %un%
@@ -171,7 +171,7 @@ where
     # cf) 특정 시간 기준 기 이후의 데이터 조회
     select * from `members`
     where
-		join_date > '2022-01-02'
+		join_date > '2022-01-02';
         
 	# cf) 날짜나 시간의 특정 부분과 일치하는 데이터 조회
     # 날짜: year(컬럼명), month(컬럼명), day(컬럼명)
@@ -179,7 +179,7 @@ where
     
     select * from `members`
     where
-    year(join_date) = '2024'
+    year(join_date) = '2024';
     
     
     # cf) 현재 날짜나 시간을 기준으로 조회
