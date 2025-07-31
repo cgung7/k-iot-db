@@ -18,36 +18,39 @@
     cf) 컬럼명 위의 한글 그대로 사용 (띄어쓰기 없이)
 */
 
+drop database `school_db`;
+
 CREATE DATABASE if not exists `school_db`;
 
 USE `school_db`;
 
-create table Studnets (
-	student_id bigint primary key auto_increment,
-    sutdnet_name varchar(100),
-    specialty varchar(100),
-    entrance_date date
+create table Students (
+	학생ID bigint primary key auto_increment,
+	이름 varchar(100),
+    전공 varchar(100),
+    입학년도 int
 );
 create table Professors (
-	professor_id bigint primary key auto_increment,
-    professor_name varchar(100),
-    lesson varchar(100),
-    office varchar(100)
+	교수ID bigint primary key auto_increment,
+    이름 varchar(100),
+    학과 varchar(100),
+    사무실위치 varchar(100)
 );
 create table Courses (
-	course_id bigint primary key auto_increment,
-    course_name varchar(100),
-    incharge varchar(100),
-    professor_id bigint,
-	foreign key (professor_id) references Professors(professor_id)
+	강의ID bigint primary key auto_increment,
+    강의명 varchar(100),
+    담당교수ID bigint,
+    학점수 varchar(100),
+	foreign key (담당교수ID) references Professors(교수ID)
 );
 create table Enrollments (
-	enrollment_id bigint primary key auto_increment,
-    student_id bigint,
-	foreign key (student_id) references Students(student_id),
-    course_id bigint,
-    foreign key (course_id) references Courses(course_id),
-
+	수강ID bigint primary key auto_increment,
+    학생ID bigint,
+    강의ID bigint,
+    수강년도 int,
+    학기 int,
+    foreign key (학생ID) references Students(학생ID),
+    foreign key (강의ID) references Courses(강의ID)
 );
 
 
@@ -96,8 +99,8 @@ WHERE 담당교수ID = 2;
 
 SELECT 
 	S.학생ID, S.이름
-FROM Stundets S
-	JOIN Enrollents E
+FROM Students S
+	JOIN Enrollments E
 	ON S.학생ID = E.학생ID
 WHERE 
 	E.수강년도 = 2023 AND E.학기 = 1;
