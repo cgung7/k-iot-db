@@ -18,6 +18,46 @@
     cf) 컬럼명 위의 한글 그대로 사용 (띄어쓰기 없이)
 */
 
+CREATE DATABASE if not exists `school_db`;
+
+USE `school_db`;
+
+create table Studnets (
+	student_id bigint primary key auto_increment,
+    sutdnet_name varchar(100),
+    specialty varchar(100),
+    entrance_date date
+);
+create table Professors (
+	professor_id bigint primary key auto_increment,
+    professor_name varchar(100),
+    lesson varchar(100),
+    office varchar(100)
+);
+create table Courses (
+	course_id bigint primary key auto_increment,
+    course_name varchar(100),
+    incharge varchar(100),
+    professor_id bigint,
+	foreign key (professor_id) references Professors(professor_id)
+);
+create table Enrollments (
+	enrollment_id bigint primary key auto_increment,
+    student_id bigint,
+	foreign key (student_id) references Students(student_id),
+    course_id bigint,
+    foreign key (course_id) references Courses(course_id),
+
+);
+
+
+
+
+
+
+
+
+
 -- Students
 INSERT INTO Students VALUES (1, 'Alice', 'Computer Science', 2020);
 INSERT INTO Students VALUES (2, 'Bob', 'Mathematics', 2021);
@@ -44,3 +84,27 @@ INSERT INTO Enrollments VALUES (3, 3, 3, 2023, 1);
 	2. 담당 교수 ID가 2인 강의의 강의명과 학점 수를 조회하는 SQL 명령문을 작성
 	3. 2023년도 1학기에 수강하는 학생들의 목록을 조회하는 SQL 명령문을 작성 (학생 ID와 이름을 포함)
 */ 
+
+SELECT 이름, 입학년도
+
+FROM Students
+WHERE 전공 = 'Computer Science';
+
+SELECT 강의명, 학점수
+FROM Courses
+WHERE 담당교수ID = 2;
+
+SELECT 
+	S.학생ID, S.이름
+FROM Stundets S
+	JOIN Enrollents E
+	ON S.학생ID = E.학생ID
+WHERE 
+	E.수강년도 = 2023 AND E.학기 = 1;
+
+
+
+
+
+
+
