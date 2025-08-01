@@ -29,19 +29,51 @@
     : 어떤 속성 집합이 다른 속성을 '결정(함수 종속)'할 수 있다면
 		, 해당 속성 잡합은 '결정자'
 	> '학번', '주민번호' 등 대부분의 후보키가 결정자가 될 수 있음
-    
-    
-    
-
 
 */
 
+# 3NF는 비주요 속성이 후보키가 아니어도 허용
+# : BCNF는 모든 결정자가 반드시 후보키(유일성, 최소성)여야 함
 
+# - 유일성: 중복 X, 최소성: 최소한의 속성들로만 키를 구성
 
+### 3NF 만족 - BCNF 만족 X ###
+USE `normal`;
 
+CREATE TABLE wrong_bcnf (
+	student_id int,
+    student_name varchar(50),
+    course_id int,
+    score int,
+    course_name varchar(50),
+    primary key (student_id, course_id)
+);
 
+# 함수 종속 관계
+# student_id + course_id(복합키) >> score, course_name 결정
 
+# 과목ID(결정자)
+# >> course_name 결정 (course_id는 결정자이긴 하지만 후보키가 아님)
+# >> BCNF 위반
 
+### 해결 방법 (BCNF 예시) ###
+CREATE TABLE 과목 (
+	과목코드 int primary key, -- 결정자를 후보키로 정의
+    과목명 varchar(50)
+);
+
+CREATE TABLE 성적 (
+	학번 int,
+    과목코드 int,
+    점수 int,
+    primary key (학번, 과목코드),
+    foreign key (과목코드) references 과목(과목코드)
+);
+
+# 1NF(원자값)
+# 2NF(완전함수종속) - 기본키 일부에만 종속된 속성 제거
+# 3NF(이행종속제거) - A > B > C형태 제거
+# BCNF(모든 결정자가 반드시 후보키)
 
 
 
